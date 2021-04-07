@@ -1,0 +1,26 @@
+/** Define font variables */
+
+/** Default Font */
+$font: 'OSFont';
+
+$font-regular: url('../fonts/Mulish-VariableFont_wght.ttf') format('truetype');
+$font-weight-regular: 400;
+
+$font-italic: url('../fonts/Mulish-Italic-VariableFont_wght.ttf') format('truetype');
+$font-weight-italic: 400;
+
+$font-medium: url('../fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+$font-weight-medium: 500;
+
+$font-medium-italic: url('../fonts/JosefinSans-Italic-VariableFont_wght.ttf') format('truetype');
+$font-weight-medium-italic: 500;
+
+/** Condensed Font */
+$font-condensed: 'OSFont Condensed';
+$font-condensed-regular: url('../fonts/JosefinSans-VariableFont_wght.ttf') format('truetype');
+$font-weight-condensed-regular: 400;
+
+/** Monospace Font */
+$font-monospace: 'OSFont Monospace';
+$font-monospace-src: url('../fonts/roboto-condensed-bold.woff') format('woff');
+$font-weight-monospace: 400;
