@@ -1,5 +1,8 @@
 # OpenSlides
 
+Detached fork from: [DlrgJugend/Openslides](https://github.com/dlrgjugend/OpenSlides)
+Original project: [OpenSlides/OpenSlides](https://github.com/OpenSlides/OpenSlides)
+
 ## What is OpenSlides?
 
 OpenSlides is a free, Web-based presentation and assembly system for
