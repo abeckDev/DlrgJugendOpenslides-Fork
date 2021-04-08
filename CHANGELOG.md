@@ -1,11 +1,9 @@
-=========================
- CHANGELOG of OpenSlides
-=========================
+# CHANGELOG of OpenSlides
+
 
 https://openslides.com
 
 Version 3.3 (2020-12-18)
-========================
 `Milestone <https://github.com/OpenSlides/OpenSlides/milestones/3.3>`_
 
 General:

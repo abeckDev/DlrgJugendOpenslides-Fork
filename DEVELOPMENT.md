@@ -10,7 +10,6 @@ and the client as an development server.
 ----------------------------------------
 
 a. Check requirements
-'''''''''''''''''''''
 
 Make sure that you have installed `Python (>= 3.6) <https://www.python.org/>`_,
 `Node.js (>=10.x) <https://nodejs.org/>`_ and `Git <http://git-scm.com/>`_ on
@@ -23,7 +22,6 @@ For Debian based systems (Ubuntu, etc) run::
 
 
 b. Get OpenSlides source code
-'''''''''''''''''''''''''''''
 
 Clone current master version from `OpenSlides GitHub repository
 <https://github.com/OpenSlides/OpenSlides/>`_::
@@ -33,7 +31,6 @@ Clone current master version from `OpenSlides GitHub repository
 
 
 c. Setup a virtual Python environment (optional)
-''''''''''''''''''''''''''''''''''''''''''''''''
 
 You can setup a virtual Python environment using the virtual environment
 (venv) package for Python to install OpenSlides as non-root user. This will
@@ -50,7 +47,7 @@ You can exit the environment with::
     $ deactivate
 
 d. Server
-'''''''''
+
 
 Go into the server's directory::
 
@@ -87,7 +84,7 @@ might be important during development: http://localhost:8000/rest/ (The trailing
 slash is important!).
 
 e. Client
-'''''''''
+
 
 Go in the client's directory::
 
@@ -102,7 +99,6 @@ After a while, the client is available under http://localhost:4200.
 
 
 2. Installation on Windows
---------------------------
 
 Follow the instructions above (Installation on GNU/Linux or Mac OS X) but care
 of the following variations.
@@ -126,16 +122,15 @@ All other commands are the same as for GNU/Linux and Mac OS X.
 
 
 3. Running the test cases
--------------------------
 
 a. Running server tests
-'''''''''''''''''''''''
+
 
 To run some server tests see `.travis.yml
 <https://github.com/OpenSlides/OpenSlides/blob/master/.travis.yml>`_.
 
 b. Client tests and commands
-''''''''''''''''''''''''''''
+
 
 Change to the client's directory to run every client related command. Run
 client tests::
@@ -158,7 +153,6 @@ README.md using following command::
 
 
 4. Notes for running OpenSlides in larger setups
-------------------------------------------------
 
 For productive setups refer to the docker-compose setup described in the main
 `README <https://github.com/OpenSlides/OpenSlides/blob/master/README.rst>`_.
