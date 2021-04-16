@@ -1,0 +1,109 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: openslides-settings
+data:
+  AMOUNT_REPLICAS: "1"
+  AUTOUPDATE_DELAY: "1"
+  DEMO_USERS: ""
+  CONNECTION_POOL_LIMIT: "100"
+  DATABASE_HOST: "pgbouncer"
+  DATABASE_PASSWORD: "openslides"
+  DATABASE_PORT: "5432"
+  DATABASE_USER: "openslides"
+  DEFAULT_FROM_EMAIL: "noreply@example.com"
+  DJANGO_LOG_LEVEL: "INFO"
+  EMAIL_HOST: "postfix"
+  EMAIL_HOST_PASSWORD: ""
+  EMAIL_HOST_USER: ""
+  EMAIL_PORT: "25"
+  EMAIL_USE_SSL: ""
+  EMAIL_USE_TLS: ""
+  EMAIL_TIMEOUT: ""
+  ENABLE_ELECTRONIC_VOTING: "False"
+  ENABLE_SAML: "False"
+  INSTANCE_DOMAIN: "http://example.com:8000"
+  JITSI_DOMAIN: ""
+  JITSI_ROOM_PASSWORD: ""
+  JITSI_ROOM_NAME: ""
+  OPENSLIDES_LOG_LEVEL: "INFO"
+  REDIS_CHANNLES_HOST: "redis-channels"
+  REDIS_CHANNLES_PORT: "6379"
+  REDIS_HOST: "redis"
+  REDIS_PORT: "6379"
+  REDIS_SLAVE_HOST: "redis-slave"
+  REDIS_SLAVE_PORT: "6379"
+  REDIS_SLAVE_WAIT_TIMEOUT: "10000"
+  RESET_PASSWORD_VERBOSE_ERRORS: "False"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openslides-server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openslides-server
+  template:
+    metadata:
+      labels:
+        app: openslides-server
+    spec:
+      imagePullSecrets:
+        - name: github-container-secret
+      containers:
+        - name: openslides-server
+          image: nginx
+          #image: docker.pkg.github.com/abeckdev/dlrgjugendopenslides-fork/openslides-server:latest
+          envFrom:
+            - configMapRef:
+                name: openslides-settings
+          env:
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openslides-secrets
+                  key: DJANGO_SECRET_KEY
+                  optional: false
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+          ports:
+            - containerPort: 8000
+        - name: openslides-server-setup
+          image: nginx
+          command:
+            - "/usr/local/sbin/entrypoint-db-setup"
+          envFrom:
+            - configMapRef:
+                name: openslides-settings
+          env:
+            - name: DJANGO_SECRET_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: openslides-secrets
+                  key: DJANGO_SECRET_KEY
+                  optional: false
+            - name: OPENSLIDES_ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: openslides-secrets
+                  key: OPENSLIDES_ADMIN_PASSWORD
+                  optional: false
+          resources:
+            limits:
+              memory: "500Mi"
+              cpu: "500m"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: openslides-server-service
+spec:
+  selector:
+    app: openslides-server
+  ports:
+    - port: 8000
+      targetPort: 8000
